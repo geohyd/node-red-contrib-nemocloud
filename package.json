@@ -1,0 +1,21 @@
+{
+  "name": "node-red-contrib-nemocloud",
+  "version": "1.0.0",
+  "description": "Nodes for interacting with the NemoCloud API",
+  "license": "MIT",
+  "keywords": [
+    "node-red",
+    "nemo",
+    "nemocloud",
+    "api"
+  ],
+  "node-red": {
+    "nodes": {
+      "nemocloud-login": "src/nemo.js",
+      "nemocloud-lastvalues": "src/nemo.js"
+    }
+  },
+  "dependencies": {
+    "axios": "^1.0.0"
+  }
+}
