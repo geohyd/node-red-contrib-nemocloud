@@ -11,8 +11,8 @@
   ],
   "node-red": {
     "nodes": {
-      "nemocloud-login": "src/nemo.js",
-      "nemocloud-lastvalues": "src/nemo.js"
+      "nemocloud-login": "src/nemo_login.js",
+      "nemocloud-lastvalues": "src/nemo_lastvalues.js"
     }
   },
   "dependencies": {

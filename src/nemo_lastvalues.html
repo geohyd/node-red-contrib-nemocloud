@@ -1,0 +1,93 @@
+<script type="text/html" data-template-name="nemocloud-lastvalues">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-baseUrl"><i class="fa fa-globe"></i> Base URL</label>
+    <input type="text" id="node-input-baseUrl" placeholder="https://www.nemocloud.com/AirQualityAPI">
+  </div>
+  <div class="form-row">
+    <label for="node-input-sensorId"><i class="fa fa-id-badge"></i> Sensor ID</label>
+    <input type="text" id="node-input-sensorId" placeholder="Sensor ID">
+  </div>
+  <div class="form-row">
+    <label for="node-input-count"><i class="fa fa-sort-numeric-asc"></i> Count</label>
+    <input type="number" id="node-input-count" placeholder="1">
+  </div>
+  <div class="form-row">
+    <label for="node-input-sessionId"><i class="fa fa-ticket"></i> Session ID</label>
+    <input type="text" id="node-input-sessionId" placeholder="Session ID">
+  </div>
+  <div class="form-row">
+    <label for="node-input-acceptVersion"><i class="fa fa-code"></i> Accept Version</label>
+    <input type="text" id="node-input-acceptVersion" placeholder="v4">
+  </div>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType("nemocloud-lastvalues", {
+    category: "Nemo",
+    color: "#a6bbcf",
+    defaults: {
+      name: { value: "" },
+      baseUrl: { value: "https://www.nemocloud.com/AirQualityAPI" },
+      sensorId: { value: "" },
+      count: { value: 1 },
+      sessionId: { value: "" },
+      acceptVersion: { value: "v4" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "node-red",
+    label: function () {
+      return this.name || "Nemo Last Values";
+    },
+  });
+</script>
+
+<script type="text/html" data-help-name="nemocloud-lastvalues">
+  <p>This node retrieves the last recorded values for a specific sensor from the NemoCloud API.</p>
+  <h3>Input</h3>
+  <dl class="message-properties">
+    <dt>payload
+        <span class="property-type">object</span>
+    </dt>
+    <dd>A JavaScript object contains <b>sensorId</b>, <b>sessionId</b> and <b>count</b> keys (default count: <code>1</code>)</dd>
+    <dt class="optional">url <span class="property-type">string</span></dt>
+    <dd>The API base URL (default: <code>https://www.nemocloud.com/AirQualityAPI</code>).</li></dd>
+    <dt>headers
+      <span class="property-type">object</span>
+    </dt>
+  <dd>A JavaScript object contains <b>acceptVersion</b> key (default: <code>v4</code>)</dd>
+  </dl>
+  <h3>Output</h3>
+  <p>The node outputs a <code>msg.payload</code> array of objects, where each object contains:</p>
+  <ul>
+    <li><b>variable</b> (object): Information about the measured variable, such as:</li>
+    <ul>
+      <li><b>id</b> (number): Variable ID.</li>
+      <li><b>name</b> (string): Variable name (e.g., "Temperature").</li>
+      <li><b>unit</b> (string): Unit of measurement (e.g., "°C").</li>
+    </ul>
+    <li><b>values</b> (array): List of values, each containing:</li>
+    <ul>
+      <li><b>time</b> (number): Timestamp of the measurement.</li>
+      <li><b>value</b> (number): Recorded value.</li>
+    </ul>
+  </ul>
+  <h4>Input example</h4>
+  <pre>
+{
+  "url": "https://www.nemocloud.com/AirQualityAPI",
+  "payload": {
+    "sensorId": "12345",
+    "sessionId": "mockSessionId",
+    "count": 1
+  },
+  "headers": {
+    "acceptVersion": "v4"
+  }
+}
+  </pre>
+</script>
