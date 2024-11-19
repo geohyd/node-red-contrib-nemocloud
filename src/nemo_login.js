@@ -30,7 +30,9 @@ module.exports = function (RED) {
         msg.payload = response.data;
         node.send(msg);
       } catch (error) {
-        node.error("Error connecting to NemoCloud API", error);
+        msg['error'] = error;
+        msg['config'] = config;
+        node.error("Error connecting to NemoCloud API", msg);
       }
     });
   }
